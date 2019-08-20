@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Game } from './Game';
+import { Game } from './components/Game';
 import './style.css';
 
 // Continue with tutorial here:
