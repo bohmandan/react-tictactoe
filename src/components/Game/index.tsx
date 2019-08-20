@@ -1,72 +1,6 @@
 import React, { Component } from 'react';
-
-interface ButtonProps {
-  buttonLabel: string,
-  onClick: () => void
-}
-
-class Square extends React.Component<ButtonProps> {
-  render() {
-    return (
-      <button className="square" onClick={this.props.onClick}>
-        {this.props.buttonLabel}
-      </button>
-    );
-  }
-}
-class Clear extends React.Component<ButtonProps> {
-  render() {
-    return (
-      <button className="clear-button" onClick={this.props.onClick}>
-        {this.props.buttonLabel}
-      </button>
-    );
-  }
-}
-
-
-interface BoardProps {
-  squares: string[],
-  onClick: (i: number) => void
-}
-
-class Board extends React.Component<BoardProps, {}> {
-  static defaultProps = {
-    squares: Array(9).fill(null)
-  }
-
-  renderSquare(i: number) {
-    return <Square
-      buttonLabel={this.props.squares[i]}
-      onClick={() => this.props.onClick(i)}
-      />;
-  }
-
-  render() {
-    const status = 'Next player: X';
-
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-}
-
+import { GameButton } from './Button';
+import { Board } from './Board';
 
 interface GameState {
     history: { squares: string[] }[],
@@ -152,7 +86,8 @@ export class Game extends React.Component<{}, GameState> {
             squares={current.squares}
             onClick={(i: number) => this.handleClick(i)}
           />
-          <Clear
+          <GameButton
+            className={"clear-button"}
             buttonLabel={"Start over"}
             onClick={() => this.clearBoard()}
           />            
